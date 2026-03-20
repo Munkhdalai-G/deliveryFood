@@ -52,7 +52,8 @@ export const ModelName = {
   User: 'User',
   Food: 'Food',
   FoodCategory: 'FoodCategory',
-  FoodOrder: 'FoodOrder'
+  FoodOrder: 'FoodOrder',
+  FoodOrderItem: 'FoodOrderItem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -113,6 +114,18 @@ export const FoodOrderScalarFieldEnum = {
 } as const
 
 export type FoodOrderScalarFieldEnum = (typeof FoodOrderScalarFieldEnum)[keyof typeof FoodOrderScalarFieldEnum]
+
+
+export const FoodOrderItemScalarFieldEnum = {
+  id: 'id',
+  quantity: 'quantity',
+  foodId: 'foodId',
+  foodOrderId: 'foodOrderId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FoodOrderItemScalarFieldEnum = (typeof FoodOrderItemScalarFieldEnum)[keyof typeof FoodOrderItemScalarFieldEnum]
 
 
 export const SortOrder = {

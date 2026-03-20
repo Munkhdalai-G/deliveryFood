@@ -1,44 +1,15 @@
 import express, { Request, Response } from "express";
 import { prisma } from "../lib/prisma";
+import { createOrder } from "../controllers/food/order/create-order";
+import { getOrder } from "../controllers/food/order/get-order";
 
 const orderRouter = express.Router();
 
-orderRouter.get("/", async (_req: Request, res: Response) => {
-  const foodsOrder = await prisma.food.findMany();
+orderRouter.get("/", getOrder);
 
-  res.json({ foodsOrder });
-});
+orderRouter.post("/", createOrder);
 
-orderRouter.get("/:id", async (req: Request, res: Response) => {
-  const { id } = req.params;
-
-  const foodOrder = await prisma.foodOrder.findFirst({
-    where: {
-      id: Number(id),
-    },
-  });
-
-  res.json({ foodOrder });
-});
-
-orderRouter.post("/", async (req: Request, res: Response) => {
-  const { totalPrice, status } = req.body;
-
-  try {
-    const foodOrder = await prisma.foodOrder.create({
-      data: {
-        totalPrice,
-        status,
-      },
-    });
-
-    res.json({ foodOrder });
-  } catch (error) {
-    res.send(error);
-  }
-});
-
-orderRouter.patch("/:id", async (req: Request, res: Response) => {
+orderRouter.put("/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
   const { totalPrice, status } = req.body;
 

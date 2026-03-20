@@ -1,13 +1,13 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import { createFood } from "../controllers/food/foods/create-food";
 import { updateFood } from "../controllers/food/foods/update-food";
 import { deleteFood } from "../controllers/food/foods/delete-food";
 import { getFoodById } from "../controllers/food/foods/get-foodById";
-import { getFood } from "../controllers/food/foods/get-food";
+import { getFoods } from "../controllers/food/foods/get-food";
 
 const router = express.Router();
 
-router.get("/", getFood);
+router.get("/", getFoods);
 
 router.get("/:id", getFoodById);
 

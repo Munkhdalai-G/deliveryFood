@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 import { prisma } from "../../../lib/prisma";
 
-export const getFoodById = async (req: Request, res: Response) => {
+export const getOrderById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const food = await prisma.food.findFirst({
+  const order = await prisma.foodOrder.findFirst({
     where: {
       id: Number(id),
     },
   });
 
-  res.json({ food });
+  res.json({ order });
 };

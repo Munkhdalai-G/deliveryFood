@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { prisma } from "../../../lib/prisma";
 
-export const getFood = async (_req: Request, res: Response) => {
-  const foods = await prisma.food.findMany();
+export const getCategories = async (_req: Request, res: Response) => {
+  const category = await prisma.foodCategory.findMany();
 
-  res.json({ foods });
+  res.json({ category });
 };

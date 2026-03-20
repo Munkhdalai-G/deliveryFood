@@ -1,24 +1,21 @@
 import { Request, Response } from "express";
 import { prisma } from "../../../lib/prisma";
 
-export const updateFood = async (req: Request, res: Response) => {
+export const updateCategory = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, price, category, foodCategoryId } = req.body;
+  const { name } = req.body;
 
   try {
-    const food = await prisma.food.update({
+    const updated = await prisma.foodCategory.update({
       where: {
         id: Number(id),
       },
       data: {
         name,
-        price,
-        category,
-        foodCategoryId,
       },
     });
 
-    res.json({ food });
+    res.json({ updated });
   } catch (error) {
     res.status(500).send(error);
   }

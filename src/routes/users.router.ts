@@ -1,5 +1,4 @@
 import express, { Request, Response } from "express";
-import { prisma } from "../lib/prisma";
 import { createUser } from "../controllers/food/user/create-user";
 import { deleteUser } from "../controllers/food/user/delete-user";
 import { getUser } from "../controllers/food/user/get-user";

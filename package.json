@@ -2,8 +2,9 @@
   "name": "deliveryserver",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "nodemon --exec ts-node src/index.ts",
+    "dev": "nodemon --exec tsx src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js"
   },
@@ -12,20 +13,23 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "-": "^0.0.1",
     "@prisma/adapter-pg": "^7.5.0",
     "@prisma/client": "^6.19.2",
     "@types/pg": "^8.18.0",
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.3.1",
-    "expess": "^0.0.1-security",
     "express": "^5.2.1",
     "install": "^0.13.0",
+    "jsonwebtoken": "^9.0.3",
     "pg": "^8.20.0",
     "prisma": "^6.19.2",
-    "save-dev": "^0.0.1-security"
+    "save-dev": "^0.0.1-security",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.4.0",
     "nodemon": "^3.1.14",
     "ts-node": "^10.9.2",
