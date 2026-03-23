@@ -7,14 +7,14 @@ import { getUserById } from "../controllers/food/user/get-userById";
 
 const userRouter = express.Router();
 
-userRouter.get("/users", getUser);
+userRouter.get("/", getUser);
 
-userRouter.get("/users/:id", getUserById);
+userRouter.get("/:id", getUserById);
 
-userRouter.post("/users", createUser);
+userRouter.post("/", createUser);
 
-userRouter.put("/users/:id", updateUser);
+userRouter.put("/:id", updateUser);
 
-userRouter.delete("/users/:id", deleteUser);
+userRouter.delete("/:id", deleteUser);
 
 export default userRouter;

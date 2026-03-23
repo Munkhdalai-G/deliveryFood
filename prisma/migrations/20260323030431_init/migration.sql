@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Food" ADD COLUMN     "image" TEXT NOT NULL DEFAULT 'NULL',
+ADD COLUMN     "ingredients" TEXT NOT NULL DEFAULT 'NULL';

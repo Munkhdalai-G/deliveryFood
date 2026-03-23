@@ -3,7 +3,8 @@ import { prisma } from "../../../lib/prisma";
 
 export const updateFood = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, price, category, foodCategoryId } = req.body;
+  const { name, price, category, foodCategoryId, image, ingredients } =
+    req.body;
 
   try {
     const food = await prisma.food.update({
@@ -14,6 +15,8 @@ export const updateFood = async (req: Request, res: Response) => {
         name,
         price,
         category,
+        image,
+        ingredients,
         foodCategoryId,
       },
     });

@@ -7,6 +7,10 @@ datasource db {
   provider = "postgresql"
     //  url= env("DATABASE_URL")
 }
+enum Role {
+  User
+  Admin
+}
 
 enum Status {
   PENDING
@@ -14,12 +18,17 @@ enum Status {
   DELIVERED
 }
 
+
 model User {
-  id          Int     @id @default(autoincrement())
-  email       String  @unique
-  password    String
-  age         Int?
-  phoneNumber String
+  id           Int     @id @default(autoincrement())
+  email        String  @unique
+  password     String
+  age          Int?
+  phoneNumber  String
+  // address      String
+  // role         String
+  // orderedFoods String
+
 }
 
 model Food {
@@ -27,6 +36,8 @@ model Food {
   name           String
   price          String
   category       FoodCategory    @relation(fields: [foodCategoryId], references: [id])
+  image          String          @default("NULL")
+  ingredients    String          @default("NULL")
   foodCategoryId Int
   foodOrderItems FoodOrderItem[]
   createdAt      DateTime        @default(now())
@@ -44,6 +55,7 @@ model FoodCategory {
 model FoodOrder {
   id             Int             @id @default(autoincrement())
   totalPrice     String
+  // userId  User @relation(fields: [],references: [id])
   status         Status @default(PENDING)
   foodOrderItems FoodOrderItem[]
   createdAt      DateTime        @default(now())

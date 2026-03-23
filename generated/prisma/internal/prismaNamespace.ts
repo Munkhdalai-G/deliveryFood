@@ -838,6 +838,8 @@ export const FoodScalarFieldEnum = {
   id: 'id',
   name: 'name',
   price: 'price',
+  image: 'image',
+  ingredients: 'ingredients',
   foodCategoryId: 'foodCategoryId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

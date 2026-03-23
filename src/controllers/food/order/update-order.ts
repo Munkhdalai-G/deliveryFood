@@ -11,7 +11,8 @@ export const updateOrder = async (req: Request, res: Response) => {
         id: Number(id),
       },
       data: {
-       foodId, quantity 
+        foodId,
+        quantity,
       },
     });
 

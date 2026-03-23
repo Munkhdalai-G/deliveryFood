@@ -8,6 +8,13 @@ export const getOrderById = async (req: Request, res: Response) => {
     where: {
       id: Number(id),
     },
+    include: {
+      foodOrderItems: {
+        include: {
+          food: true,
+        },
+      },
+    },
   });
 
   res.json({ order });

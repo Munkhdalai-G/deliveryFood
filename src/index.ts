@@ -11,8 +11,8 @@ app.use(express.json());
 
 app.use("/users", userRouter);
 app.use("/foods", foodsRouter);
-app.use("/category", categoryRouter);
-app.use("/order", orderRouter);
+app.use("/categories", categoryRouter);
+app.use("/orders", orderRouter);
 // app.use("/order", orderItemRouter);
 
 app.listen(PORT, () => {
