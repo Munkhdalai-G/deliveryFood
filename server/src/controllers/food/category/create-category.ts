@@ -15,4 +15,4 @@ export const createCategory = async (req: Request, res: Response) => {
   } catch (error) {
     res.send(error);
   }
-};
+}
