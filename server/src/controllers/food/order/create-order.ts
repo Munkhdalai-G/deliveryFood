@@ -11,8 +11,10 @@ type Body = {
 };
 
 export const createOrder = async (req: Request, res: Response) => {
+  const headers = req.headers;
+  console.log("headers:", headers);
+  return res.send("ok");
   const { orderItems }: Body = req.body;
-
   try {
     const foodIds = orderItems.map((item) => item.foodId);
 
