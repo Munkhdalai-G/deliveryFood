@@ -5,16 +5,16 @@ import { deleteFood } from "../controllers/food/foods/delete-food";
 import { getFoodById } from "../controllers/food/foods/get-foodById";
 import { getFoods } from "../controllers/food/foods/get-food";
 
-const router = express.Router();
+const foodsrouter = express.Router();
 
-router.get("/", getFoods);
+foodsrouter.get("/", getFoods);
 
-router.get("/:id", getFoodById);
+foodsrouter.get("/:id", getFoodById);
 
-router.post("/", createFood);
+foodsrouter.post("/", createFood);
 
-router.put("/:id", updateFood);
+foodsrouter.put("/:id", updateFood);
 
-router.delete("/:id", deleteFood);
+foodsrouter.delete("/:id", deleteFood);
 
-export default router;
+export default foodsrouter;

@@ -1,5 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar";
-import Navi from "@/components/ui/navi";
+import Navi from "@/app/dashboard/components/navi";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Divide } from "lucide-react";
 import Link from "next/link";

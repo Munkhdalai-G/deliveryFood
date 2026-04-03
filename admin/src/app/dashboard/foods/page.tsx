@@ -1,4 +1,5 @@
-import DishCategory from "@/components/ui/dishCategory";
+import DishCategory from "../components/dishCategory";
+
 
 export default function Foods() {
   return (

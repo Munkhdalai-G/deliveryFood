@@ -8,7 +8,7 @@ import orderRouter from "./routes/foodsOrder.router";
 const app = express();
 const PORT = process.env.PORT || 8787;
 
-app.use(cors()); // ✅ added
+app.use(cors());
 app.use(express.json());
 
 app.use("/users", userRouter);

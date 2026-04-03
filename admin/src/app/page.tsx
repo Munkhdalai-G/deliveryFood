@@ -1,5 +1,5 @@
-import DishCategory from "@/components/ui/dishCategory";
-import Navi from "@/components/ui/navi";
+import Navi from "@/app/dashboard/components/navi";
+import DishCategory from "./dashboard/components/dishCategory";
 
 export default function Home() {
   return (

@@ -1,7 +1,7 @@
 "use client";
+import { Badge } from "@/components/ui/badge";
 import { Plus, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Badge } from "./badge";
 
 type Category = {
   id: number;
@@ -14,7 +14,7 @@ export default function DishCategory() {
   const [categoryName, setCategoryName] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ Fetch real categories on load
+  // Fetch real categories on load
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -114,7 +114,7 @@ export default function DishCategory() {
       {/* Add Category Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-8 w-[420px] shadow-xl">
+          <div className="bg-white rounded-2xl p-8 w-105 shadow-xl">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-semibold">Add new category</h2>
               <button onClick={() => setShowModal(false)}>
