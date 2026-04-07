@@ -1,4 +1,4 @@
-import Orderss from "@/app/dashboard/components/orderss";
+import Orderss from "@/app/dashboard/components/Orderss";
 
 export default function Orders() {
   return (

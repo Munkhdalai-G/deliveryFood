@@ -2,44 +2,72 @@
 import { Badge } from "@/components/ui/badge";
 import { Plus, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { FoodAddDialog } from "./FoodAddDialog";
 
 type Category = {
   id: number;
   name: string;
 };
 
+type Food = {
+  id: number;
+  name: string;
+  price: string;
+  image: string;
+  ingredients: string;
+  foodCategoryId: number;
+};
+
 export default function DishCategory() {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [foods, setFoods] = useState<Food[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [categoryName, setCategoryName] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Fetch real categories on load
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch(
+        "https://deliveryfood-d0p6.onrender.com/categories",
+      );
+      const data = await res.json();
+      setCategories(data.category);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // ✅ Fetch foods from backend
+  const fetchFoods = async () => {
+    try {
+      const res = await fetch("https://deliveryfood-d0p6.onrender.com/foods");
+      const data = await res.json();
+      setFoods(data.foods); // adjust if your API returns different key
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const res = await fetch("http://localhost:8787/categories");
-        const data = await res.json();
-        setCategories(data.category); // data.category is the array
-      } catch (err) {
-        console.error(err);
-      }
-    };
     fetchCategories();
+    fetchFoods();
   }, []);
 
   const handleAddCategory = async () => {
     if (!categoryName.trim()) return;
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:8787/categories", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: categoryName }),
-      });
+      const res = await fetch(
+        "https://deliveryfood-d0p6.onrender.com/categories",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: categoryName }),
+        },
+      );
       if (!res.ok) throw new Error("Failed");
       const data = await res.json();
-      setCategories((prev) => [...prev, data.category]); // data.category is the object
+      setCategories((prev) => [...prev, data.category]);
       setCategoryName("");
       setShowModal(false);
     } catch (err) {
@@ -62,7 +90,7 @@ export default function DishCategory() {
             >
               {cat.name}
               <div className="text-white bg-black rounded-4xl px-1.5 h-5 justify-center text-center items-center flex text-[14px]">
-                0
+                {foods.filter((f) => f.foodCategoryId === cat.id).length}
               </div>
             </Badge>
           ))}
@@ -72,42 +100,49 @@ export default function DishCategory() {
         </div>
       </div>
 
-      {/* Appetizers Section */}
+      {/* Foods Section */}
       <div className="mx-10 bg-white px-8 flex flex-col pb-5 border border-transparent rounded-2xl">
-        <div className="text-2xl font-semibold py-3 flex">
-          Appetizers <div>({6})</div>
+        <div className="text-2xl font-semibold py-3 flex gap-1">
+          All Foods <div>({foods.length})</div>
         </div>
         <div className="grid grid-cols-4 gap-5">
           {/* Add New Dish Card */}
-          <div className="border border-dashed rounded-2xl border-orange-600 flex flex-col justify-center items-center h-60 gap-2">
-            <Plus className="border rounded-2xl bg-red-500 text-white h-9 w-9" />
-            <p className="flex flex-wrap w-35 justify-center text-center">
-              Add new Dish to Appetizers
-            </p>
-          </div>
-
-          {/* Dish Card */}
-          <div className="border rounded-2xl border-orange-600 flex flex-col items-center h-60 overflow-hidden">
-            <div className="w-full px-4 mt-4">
-              <img
-                className="w-full h-32 rounded-2xl object-cover"
-                src="/pizza.jpeg"
-                alt="Brie Crostini Appetizer"
-              />
-            </div>
-            <div className="px-4 w-full">
-              <div className="flex text-[14px] gap-2 pt-2.5 justify-between">
-                <div className="text-orange-600 truncate">
-                  Brie Crostini Appetizer
-                </div>
-                <div className="shrink-0">$12.99</div>
+          <FoodAddDialog
+            onFoodAdded={fetchFoods} // ✅ refreshes list after adding
+            trigger={
+              <div className="border border-dashed rounded-2xl border-orange-600 flex flex-col justify-center items-center h-60 gap-2 cursor-pointer hover:bg-orange-50 transition">
+                <Plus className="border rounded-2xl bg-red-500 text-white h-9 w-9" />
+                <p className="flex flex-wrap w-35 justify-center text-center">
+                  Add new Dish
+                </p>
               </div>
-              <p className="text-[14px] text-gray-500 line-clamp-2">
-                Fluffy pancakes stacked with fruits, cream, syrup, and powdered
-                sugar.
-              </p>
+            }
+          />
+
+          {/* ✅ Render real foods */}
+          {foods.map((food) => (
+            <div
+              key={food.id}
+              className="border rounded-2xl border-orange-600 flex flex-col items-center h-60 overflow-hidden"
+            >
+              <div className="w-full px-4 mt-4">
+                <img
+                  className="w-full h-32 rounded-2xl object-cover"
+                  src={food.image || "/pizza.jpeg"}
+                  alt={food.name}
+                />
+              </div>
+              <div className="px-4 w-full">
+                <div className="flex text-[14px] gap-2 pt-2.5 justify-between">
+                  <div className="text-orange-600 truncate">{food.name}</div>
+                  <div className="shrink-0">${food.price}</div>
+                </div>
+                <p className="text-[14px] text-gray-500 line-clamp-2">
+                  {food.ingredients}
+                </p>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
 
